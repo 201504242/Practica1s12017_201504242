@@ -9,14 +9,6 @@ package practica1edd_201504242;
  *
  * @author p_ab1
  */
-public class Practica1EDD_201504242 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.print("Prueba commmit en netbeas");
-    }
+public class ventanaInicio {
     
 }
