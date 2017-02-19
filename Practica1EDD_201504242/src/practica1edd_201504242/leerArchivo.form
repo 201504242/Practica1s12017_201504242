@@ -50,6 +50,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Leer Archivo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jugar">
       <Properties>

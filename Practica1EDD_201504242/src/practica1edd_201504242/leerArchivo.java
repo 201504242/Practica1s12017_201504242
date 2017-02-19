@@ -33,6 +33,11 @@ public class leerArchivo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         leer.setText("Leer Archivo");
+        leer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leerActionPerformed(evt);
+            }
+        });
 
         jugar.setText("Jugar");
 
@@ -59,6 +64,11 @@ public class leerArchivo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_leerActionPerformed
 
     /**
      * @param args the command line arguments
