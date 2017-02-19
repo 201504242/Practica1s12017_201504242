@@ -16,7 +16,8 @@ public class Practica1EDD_201504242 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.print("Prueba commmit en netbeas");
+        leerArchivo leer = new  leerArchivo();
+        leer.setVisible(true);
     }
     
 }
