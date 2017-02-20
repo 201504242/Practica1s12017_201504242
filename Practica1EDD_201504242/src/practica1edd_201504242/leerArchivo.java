@@ -5,6 +5,13 @@
  */
 package practica1edd_201504242;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author p_ab1
@@ -67,7 +74,8 @@ public class leerArchivo extends javax.swing.JFrame {
 
     private void leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerActionPerformed
         // TODO add your handling code here:
-        
+       String archivo = abrirArchivo();
+       System.out.println(archivo);
     }//GEN-LAST:event_leerActionPerformed
 
     /**
@@ -109,4 +117,32 @@ public class leerArchivo extends javax.swing.JFrame {
     private javax.swing.JButton jugar;
     private javax.swing.JButton leer;
     // End of variables declaration//GEN-END:variables
+    private String abrirArchivo() {
+          String aux="";   
+          String texto="";
+          try
+          {
+           JFileChooser file=new JFileChooser();
+           file.showOpenDialog(this);
+           File abre=file.getSelectedFile();
+
+           if(abre!=null)
+           {     
+              FileReader archivos=new FileReader(abre);
+              BufferedReader lee=new BufferedReader(archivos);
+              while((aux=lee.readLine())!=null)
+              {
+                 texto+= aux+ "\n";
+              }
+                 lee.close();
+            }    
+           }
+           catch(IOException ex)
+           {
+             JOptionPane.showMessageDialog(null,ex+"" +
+                   "\nNo se ha encontrado el archivo",
+                         "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+            }
+          return texto;//El texto se almacena en el JTextArea
+        }
 }
