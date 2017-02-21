@@ -5,13 +5,18 @@
  */
 package practica1edd_201504242;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.List;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
+import org.jdom2.Document;         // |
+import org.jdom2.Element;          // |\ Librerías
+import org.jdom2.JDOMException;    // |/ JDOM
+import org.jdom2.input.SAXBuilder; // |
 /**
  *
  * @author p_ab1
@@ -74,8 +79,13 @@ public class leerArchivo extends javax.swing.JFrame {
 
     private void leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerActionPerformed
         // TODO add your handling code here:
-       String archivo = abrirArchivo();
-       System.out.println(archivo);
+       String archivo="";
+        try {
+            archivo = abrirArchivo();
+            XML(archivo);
+        } catch (Exception ex) {
+            Logger.getLogger(leerArchivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_leerActionPerformed
 
     /**
@@ -117,32 +127,89 @@ public class leerArchivo extends javax.swing.JFrame {
     private javax.swing.JButton jugar;
     private javax.swing.JButton leer;
     // End of variables declaration//GEN-END:variables
-    private String abrirArchivo() {
-          String aux="";   
-          String texto="";
-          try
-          {
-           JFileChooser file=new JFileChooser();
-           file.showOpenDialog(this);
-           File abre=file.getSelectedFile();
-
-           if(abre!=null)
-           {     
-              FileReader archivos=new FileReader(abre);
-              BufferedReader lee=new BufferedReader(archivos);
-              while((aux=lee.readLine())!=null)
-              {
-                 texto+= aux+ "\n";
-              }
-                 lee.close();
-            }    
-           }
-           catch(IOException ex)
-           {
-             JOptionPane.showMessageDialog(null,ex+"" +
-                   "\nNo se ha encontrado el archivo",
-                         "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
-            }
-          return texto;//El texto se almacena en el JTextArea
+    private String abrirArchivo() throws JDOMException, FileNotFoundException, IOException {
+//        String aux="";   
+//        String texto="";
+        JFileChooser file=new JFileChooser();
+        file.showOpenDialog(this);
+        File abre=file.getSelectedFile();
+        String ruta = abre.getPath();
+        
+//           if(abre!=null)
+//           {     
+//              FileReader archivos=new FileReader(abre);
+//              BufferedReader lee=new BufferedReader(archivos);
+//              while((aux=lee.readLine())!=null)
+//              {
+//                 texto+= aux+ "\n";
+//              }
+//                 lee.close();
+//            }
+          return ruta;
         }
-}
+
+    private void XML(String archivo) {
+        SAXBuilder builder = new SAXBuilder();
+        File xmlFile = new File(archivo);
+        try
+        {
+            //Se crea el documento a traves del archivo
+            Document document = (Document) builder.build( xmlFile );
+            //Se obtiene la raiz 'scrabble'
+            Element rootNode = document.getRootElement();
+            //Se obtiene la lista de hijos de la raiz 'scrabble'
+            List diccionario = rootNode.getChildren( "diccionario" );
+            List triples = rootNode.getChildren( "triples" );
+            List dobles = rootNode.getChildren( "dobles" );
+            List dimension = rootNode.getChildren( "dimension" );
+            //SE LEEN LA DIMENSION DE LA MATRIZ
+            for(int q=0 ; q<dimension.size();q++){
+                Element dime= (Element) dimension.get(q);
+                System.out.println(dime.getValue());
+            }
+            //SE LEEN atributos DICCIONARIO
+            for ( int i = 0;i< diccionario.size(); i++ ){
+                Element elementoDiccionario = (Element) diccionario.get(i);
+                List listaDiccionario = elementoDiccionario.getChildren();
+                //LISTA DE DICCIONARIO
+                for ( int j = 0; j < listaDiccionario.size(); j++ )
+                {
+                    Element campo = (Element)listaDiccionario.get( j );
+                    String palabra = campo.getValue();
+                    System.out.println(palabra);
+                }
+            }
+           //SE LEEN LOS TRIPLES
+            for ( int i = 0;i< triples.size(); i++ ){
+                Element elementoTriple = (Element) triples.get(i);
+                List listaTriples = elementoTriple.getChildren();
+
+                for ( int j = 0; j < listaTriples.size(); j++ )
+                {
+                    Element campo = (Element)listaTriples.get( j );
+                    String x = campo.getChildTextTrim("x");
+                    String y = campo.getChildTextTrim("y");
+                    System.out.println("X: "+x+" Y: "+y );
+                }
+            }
+            //SE LEEN LOS DOBLES
+             for ( int i = 0;i< dobles.size(); i++ ){
+                Element elementoDoble = (Element) dobles.get(i);
+                List listaDoble = elementoDoble.getChildren();
+
+                for ( int j = 0; j < listaDoble.size(); j++ )
+                {
+                    Element campo = (Element)listaDoble.get( j );
+                    String x = campo.getChildTextTrim("x");
+                    String y = campo.getChildTextTrim("y");
+                    System.out.println("X: "+x+" Y: "+y );
+                }
+            }
+
+        }catch ( IOException io ) {
+            System.out.println( io.getMessage() );
+        }catch ( JDOMException jdomex ) {
+            System.out.println( jdomex.getMessage() );
+        }      
+        }   
+    }
