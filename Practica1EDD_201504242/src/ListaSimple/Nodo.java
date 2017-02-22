@@ -12,6 +12,15 @@ package ListaSimple;
 public class Nodo {
     public Object valor;
     public Nodo siguiente;
+
+    public void setAnterior(Nodo anterior) {
+        this.anterior = anterior;
+    }
+    private Nodo anterior;
+
+    public Nodo getAnterior() {
+        return anterior;
+    }
     
     public void setValor(Object valor) {
         this.valor = valor;
@@ -30,6 +39,7 @@ public class Nodo {
     public Nodo() {
         this.valor ="";
         this.siguiente = null;
+        this.anterior=null;
     }
     
     

@@ -26,6 +26,7 @@ public Cola randomCola = new Cola ();
      */
     public Jugadores() {
         initComponents();
+        randomLetras();
     }
 
     /**
@@ -100,11 +101,11 @@ public Cola randomCola = new Cola ();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        randomLetras();
+        
         System.out.println("Letras ingresadas a Lista Simple");
-        for(int i =0;i<letras.length;i++){
-            listaLetras.agregar(String.valueOf(letras[i]));
-            System.out.print(letras[i]+" ");
+        for(int i =0;i<7;i++){
+            listaLetras.agregar(String.valueOf(randomCola.pop()));
+            System.out.print(randomCola.pop()+" ");
         }        
         jugadores.insertarUltimo(caja.getText(),listaLetras);
         System.out.println("Cantidad de nodos:"+jugadores.getSize());
@@ -198,15 +199,15 @@ public void randomLetras(){
             }       
         }
         System.out.print("SALIO");
-    
-        char[] letra={'A','B','C','D','E','F','G','H','I','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-           
-           Random rnd = new Random();
-           int x;
-            for (int i = 0; i < 7; i++) {
-                    x = (int)(rnd.nextDouble() * 10.0);
-                    letras[i]=(letra[x]);
-            }
+//    
+//        char[] letra={'A','B','C','D','E','F','G','H','I','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+//           
+//           Random rnd = new Random();
+//           int x;
+//            for (int i = 0; i < 7; i++) {
+//                    x = (int)(rnd.nextDouble() * 10.0);
+//                    letras[i]=(letra[x]);
+//            }
         }
 }
 

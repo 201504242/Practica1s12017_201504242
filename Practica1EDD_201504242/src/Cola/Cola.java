@@ -33,4 +33,12 @@ public class Cola {
         this.primero = this.primero.getSiguiente() != null ? this.primero.getSiguiente() : null;
         tama--;
     }
+     public Object pop() {
+        NodoCola Aux;
+        Aux = this.primero;
+        this.primero = this.primero.getSiguiente();
+        tama=tama-1;
+        return Aux.getDato();        
+        
+    }
 }
