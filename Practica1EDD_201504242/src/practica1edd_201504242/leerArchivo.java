@@ -25,8 +25,6 @@ import org.jdom2.input.SAXBuilder; // |
  */
 public class leerArchivo extends javax.swing.JFrame {
 public ListaSimple palabras = new ListaSimple();
-public char letras[]= new char[7] ;
-Cola letrasSele = new Cola();
     /**
      * Creates new form leerArchivo
      */
@@ -55,7 +53,7 @@ Cola letrasSele = new Cola();
             }
         });
 
-        jugar.setText("Jugar");
+        jugar.setText("Asignar Jugadores");
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugarActionPerformed(evt);
@@ -69,9 +67,9 @@ Cola letrasSele = new Cola();
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(leer, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,12 +97,10 @@ Cola letrasSele = new Cola();
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         // TODO add your handling code here:        System.out.println("Tamano lista: "+palabras.getTama());
-        // ASIGNACION LETRAS 
-        randomLetras();
-        for(int i =0;i<letras.length;i++){
-            letrasSele.agregar(String.valueOf(letras[i]));
-            System.out.print(letras[i]+" ");
-        }
+        
+        Jugadores jug = new Jugadores();
+        jug.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jugarActionPerformed
 
     /**
@@ -222,13 +218,5 @@ Cola letrasSele = new Cola();
         }      
         }   
     
-        public void randomLetras(){
-           char[] letra={'A','B','C','D','E','F','G','H','I','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-           Random rnd = new Random();
-           int x;
-            for (int i = 0; i < 7; i++) {
-                    x = (int)(rnd.nextDouble() * 10.0);
-                    letras[i]=(letra[x]);
-            }
-        }
+        
     }
