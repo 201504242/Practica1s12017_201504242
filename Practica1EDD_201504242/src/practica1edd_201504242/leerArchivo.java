@@ -5,14 +5,16 @@
  */
 package practica1edd_201504242;
 
+import Cola.Cola;
+import ListaSimple.ListaSimple;
 import java.io.File;
-import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-
 import org.jdom2.Document;         // |
 import org.jdom2.Element;          // |\ Librerías
 import org.jdom2.JDOMException;    // |/ JDOM
@@ -22,7 +24,9 @@ import org.jdom2.input.SAXBuilder; // |
  * @author p_ab1
  */
 public class leerArchivo extends javax.swing.JFrame {
-
+public ListaSimple palabras = new ListaSimple();
+public char letras[]= new char[7] ;
+Cola letrasSele = new Cola();
     /**
      * Creates new form leerArchivo
      */
@@ -52,26 +56,31 @@ public class leerArchivo extends javax.swing.JFrame {
         });
 
         jugar.setText("Jugar");
+        jugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(21, 21, 21)
                 .addComponent(leer, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(33, 33, 33)
                 .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(leer, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101))
+                    .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leer, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,6 +96,16 @@ public class leerArchivo extends javax.swing.JFrame {
             Logger.getLogger(leerArchivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_leerActionPerformed
+
+    private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
+        // TODO add your handling code here:        System.out.println("Tamano lista: "+palabras.getTama());
+        // ASIGNACION LETRAS 
+        randomLetras();
+        for(int i =0;i<letras.length;i++){
+            letrasSele.agregar(String.valueOf(letras[i]));
+            System.out.print(letras[i]+" ");
+        }
+    }//GEN-LAST:event_jugarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,26 +146,14 @@ public class leerArchivo extends javax.swing.JFrame {
     private javax.swing.JButton jugar;
     private javax.swing.JButton leer;
     // End of variables declaration//GEN-END:variables
+    
     private String abrirArchivo() throws JDOMException, FileNotFoundException, IOException {
-//        String aux="";   
-//        String texto="";
         JFileChooser file=new JFileChooser();
         file.showOpenDialog(this);
         File abre=file.getSelectedFile();
         String ruta = abre.getPath();
-        
-//           if(abre!=null)
-//           {     
-//              FileReader archivos=new FileReader(abre);
-//              BufferedReader lee=new BufferedReader(archivos);
-//              while((aux=lee.readLine())!=null)
-//              {
-//                 texto+= aux+ "\n";
-//              }
-//                 lee.close();
-//            }
           return ruta;
-        }
+     }
 
     private void XML(String archivo) {
         SAXBuilder builder = new SAXBuilder();
@@ -158,6 +165,7 @@ public class leerArchivo extends javax.swing.JFrame {
             //Se obtiene la raiz 'scrabble'
             Element rootNode = document.getRootElement();
             //Se obtiene la lista de hijos de la raiz 'scrabble'
+//            
             List diccionario = rootNode.getChildren( "diccionario" );
             List triples = rootNode.getChildren( "triples" );
             List dobles = rootNode.getChildren( "dobles" );
@@ -170,12 +178,13 @@ public class leerArchivo extends javax.swing.JFrame {
             //SE LEEN atributos DICCIONARIO
             for ( int i = 0;i< diccionario.size(); i++ ){
                 Element elementoDiccionario = (Element) diccionario.get(i);
-                List listaDiccionario = elementoDiccionario.getChildren();
+                List listaDiccionario =  elementoDiccionario.getChildren();
                 //LISTA DE DICCIONARIO
                 for ( int j = 0; j < listaDiccionario.size(); j++ )
                 {
-                    Element campo = (Element)listaDiccionario.get( j );
+                    Element campo = (Element)listaDiccionario.get(j);
                     String palabra = campo.getValue();
+                    palabras.agregar(palabra);
                     System.out.println(palabra);
                 }
             }
@@ -186,7 +195,7 @@ public class leerArchivo extends javax.swing.JFrame {
 
                 for ( int j = 0; j < listaTriples.size(); j++ )
                 {
-                    Element campo = (Element)listaTriples.get( j );
+                    Element campo = (Element)listaTriples.get(j );
                     String x = campo.getChildTextTrim("x");
                     String y = campo.getChildTextTrim("y");
                     System.out.println("X: "+x+" Y: "+y );
@@ -199,7 +208,7 @@ public class leerArchivo extends javax.swing.JFrame {
 
                 for ( int j = 0; j < listaDoble.size(); j++ )
                 {
-                    Element campo = (Element)listaDoble.get( j );
+                    Element campo = (Element)listaDoble.get(j );
                     String x = campo.getChildTextTrim("x");
                     String y = campo.getChildTextTrim("y");
                     System.out.println("X: "+x+" Y: "+y );
@@ -212,4 +221,14 @@ public class leerArchivo extends javax.swing.JFrame {
             System.out.println( jdomex.getMessage() );
         }      
         }   
+    
+        public void randomLetras(){
+           char[] letra={'A','B','C','D','E','F','G','H','I','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+           Random rnd = new Random();
+           int x;
+            for (int i = 0; i < 7; i++) {
+                    x = (int)(rnd.nextDouble() * 10.0);
+                    letras[i]=(letra[x]);
+            }
+        }
     }
