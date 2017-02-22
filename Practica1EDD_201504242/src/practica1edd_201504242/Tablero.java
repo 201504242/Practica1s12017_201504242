@@ -41,6 +41,7 @@ ListaSimple cola = new ListaSimple();
         imprimirDiccionario("dic");    
         imprimirJuga("juga");
         imprimirLetras("letra");
+        
     }
 
     /**
@@ -59,6 +60,8 @@ ListaSimple cola = new ListaSimple();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         nuevaPalabra = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -140,6 +143,26 @@ ListaSimple cola = new ListaSimple();
         );
 
         jTabbedPane1.addTab("Cola de Fichas", jPanel1);
+
+        jLabel5.setText("jLabel5");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 38, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Fichas Activas ", jPanel4);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Nueva Palabra:");
@@ -297,9 +320,11 @@ ListaSimple cola = new ListaSimple();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nuevaPalabra;
     // End of variables declaration//GEN-END:variables
@@ -405,5 +430,6 @@ ListaSimple cola = new ListaSimple();
             jLabel4.setIcon(new ImageIcon("C:\\Users\\p_ab1\\Desktop\\PracticaEDD\\Imagenes\\"+nombre+".jpg"));
             this.repaint();
     }
+
 }
 
