@@ -5,13 +5,11 @@
  */
 package practica1edd_201504242;
 
-import Cola.Cola;
 import ListaSimple.ListaSimple;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -98,7 +96,7 @@ public ListaSimple palabras = new ListaSimple();
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         // TODO add your handling code here:        System.out.println("Tamano lista: "+palabras.getTama());
         
-        Jugadores jug = new Jugadores();
+        Jugadores jug = new Jugadores(palabras);
         jug.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jugarActionPerformed

@@ -8,7 +8,6 @@ package practica1edd_201504242;
 import Cola.Cola;
 import ListaCircular.ListaCircular;
 import ListaSimple.ListaSimple;
-import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -21,6 +20,7 @@ public ListaSimple listaLetras = new ListaSimple();
 public Cola colaLetras = new Cola();
 public ListaCircular jugadores=new ListaCircular();
 public Cola randomCola = new Cola ();
+public ListaSimple mandar = new ListaSimple();
     /**
      * Creates new form Jugadores
      */
@@ -29,6 +29,12 @@ public Cola randomCola = new Cola ();
         randomLetras();
     }
 
+    Jugadores(ListaSimple palabras) {
+        initComponents();
+        randomLetras();
+        mandar=palabras;
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,6 +121,8 @@ public Cola randomCola = new Cola ();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Tablero table = new Tablero(jugadores,mandar,listaLetras);
+        table.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

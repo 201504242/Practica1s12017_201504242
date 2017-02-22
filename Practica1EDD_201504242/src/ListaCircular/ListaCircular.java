@@ -15,6 +15,7 @@ public class ListaCircular {
    class Nodo {
         String valor;
         Nodo anterior,siguiente;
+        
         Object listaLetras;
     }
     
@@ -54,11 +55,31 @@ public class ListaCircular {
         if (!isEmpty()) {
             Nodo reco=raiz;
             do {
-                System.out.print (reco.valor + "-");
+                System.out.print (reco.valor + "->");
                 reco = reco.siguiente;                
             } while (reco!=raiz);
             System.out.println();
         }    
+    }
+    
+      public String imp ()
+    {
+        String reto="";
+        if (!isEmpty()) {
+            Nodo reco=raiz;
+            do {
+                System.out.print (reco.valor + "->");
+                reto= reto+reco.valor;
+                reco = reco.siguiente;
+                if(reco!=raiz){
+                    reto=reto+"->";
+                }else{
+                    reto=reto+"->"+reco.valor;
+                }
+            } while (reco!=raiz);
+            System.out.println();
+        }    
+        return reto;
     }
     
     public int getSize ()
@@ -73,4 +94,5 @@ public class ListaCircular {
         }    
         return cant;
     }
+    
 }
